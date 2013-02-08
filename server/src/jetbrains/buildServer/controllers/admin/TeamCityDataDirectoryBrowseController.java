@@ -8,6 +8,7 @@ import jetbrains.buildServer.controllers.AuthorizationInterceptor;
 import jetbrains.buildServer.controllers.FileBrowseController;
 import jetbrains.buildServer.serverSide.SBuildServer;
 import jetbrains.buildServer.serverSide.ServerPaths;
+import jetbrains.buildServer.serverSide.TeamCityProperties;
 import jetbrains.buildServer.serverSide.auth.Permission;
 import jetbrains.buildServer.serverSide.auth.SecurityContext;
 import jetbrains.buildServer.util.browser.Element;
@@ -28,6 +29,8 @@ import java.util.Map;
  * @since 8.0
  */
 public class TeamCityDataDirectoryBrowseController extends FileBrowseController {
+  private static final String DIRECTORY_PATH = TeamCityProperties.getPropertyOrNull("teamcity.browse.directory.path");
+
   public TeamCityDataDirectoryBrowseController(@NotNull SBuildServer server,
                                                @NotNull SecurityContext securityContext,
                                                @NotNull ServerPaths serverPaths,
@@ -37,7 +40,8 @@ public class TeamCityDataDirectoryBrowseController extends FileBrowseController 
                                                @NotNull PagePlaces pagePlaces,
                                                @NotNull PluginDescriptor pluginDescriptor) {
     super(server, securityContext, webControllerManager, interceptor, webAccessService,
-          serverPaths.getDataDirectory(), "/admin/dataDir.html");
+          DIRECTORY_PATH != null ? new File(DIRECTORY_PATH) : serverPaths.getDataDirectory(),
+          "/admin/dataDir.html");
     new DataDirectoryBrowseExtension(pagePlaces, pluginDescriptor).register();
   }
 
