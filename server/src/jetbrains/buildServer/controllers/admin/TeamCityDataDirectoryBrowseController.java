@@ -15,6 +15,7 @@ import jetbrains.buildServer.util.browser.Element;
 import jetbrains.buildServer.web.WebAccessHelper;
 import jetbrains.buildServer.web.WebAccessService;
 import jetbrains.buildServer.web.openapi.*;
+import jetbrains.buildServer.web.util.WebUtil;
 import jetbrains.buildServer.web.util.lazytree.DefaultLazyTreeElementRenderer;
 import jetbrains.buildServer.web.util.lazytree.LazyTreeElementRenderer;
 import org.jetbrains.annotations.NotNull;
@@ -89,7 +90,12 @@ public class TeamCityDataDirectoryBrowseController extends FileBrowseController 
 
   @Override
   protected boolean isUploadSupported() {
-    return false;
+    return true;
+  }
+
+  @Override
+  protected boolean isUploadToAnySubdirectory() {
+    return true;
   }
 
   @Override
@@ -100,7 +106,7 @@ public class TeamCityDataDirectoryBrowseController extends FileBrowseController 
   @NotNull
   @Override
   protected String getUploadResponseJsBase() {
-    return "";
+    return "BS.DataDir";
   }
 
   private class DataDirectoryBrowseExtension extends SimpleCustomTab {
@@ -152,7 +158,7 @@ public class TeamCityDataDirectoryBrowseController extends FileBrowseController 
 
     @Override
     public String getHrefForLeaf(@NotNull Element leaf) {
-      return isInsideZip(leaf) ? null : myPath + "&file=" + getRelativePath(leaf.getFullName());
+      return isInsideZip(leaf) ? null : myPath + "&file=" + WebUtil.encode(getRelativePath(leaf.getFullName()));
     }
   }
 }
