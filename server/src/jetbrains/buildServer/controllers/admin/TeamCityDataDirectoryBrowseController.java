@@ -4,6 +4,8 @@
  */
 package jetbrains.buildServer.controllers.admin;
 
+import com.intellij.openapi.util.SystemInfo;
+import com.intellij.openapi.util.io.FileUtil;
 import jetbrains.buildServer.controllers.AuthorizationInterceptor;
 import jetbrains.buildServer.controllers.FileBrowseController;
 import jetbrains.buildServer.serverSide.SBuildServer;
@@ -158,7 +160,7 @@ public class TeamCityDataDirectoryBrowseController extends FileBrowseController 
 
     @Override
     public String getHrefForLeaf(@NotNull Element leaf) {
-      return isInsideZip(leaf) ? null : myPath + "&file=" + WebUtil.encode(getRelativePath(leaf.getFullName()));
+      return isInsideZip(leaf) ? null : myPath + "&file=" + leaf.getFullName();
     }
   }
 }
