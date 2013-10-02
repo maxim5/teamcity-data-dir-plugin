@@ -4,8 +4,6 @@
  */
 package jetbrains.buildServer.controllers.admin;
 
-import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.util.io.FileUtil;
 import jetbrains.buildServer.controllers.AuthorizationInterceptor;
 import jetbrains.buildServer.controllers.FileBrowseController;
 import jetbrains.buildServer.serverSide.SBuildServer;
@@ -17,7 +15,6 @@ import jetbrains.buildServer.util.browser.Element;
 import jetbrains.buildServer.web.WebAccessHelper;
 import jetbrains.buildServer.web.WebAccessService;
 import jetbrains.buildServer.web.openapi.*;
-import jetbrains.buildServer.web.util.WebUtil;
 import jetbrains.buildServer.web.util.lazytree.DefaultLazyTreeElementRenderer;
 import jetbrains.buildServer.web.util.lazytree.LazyTreeElementRenderer;
 import org.jetbrains.annotations.NotNull;
