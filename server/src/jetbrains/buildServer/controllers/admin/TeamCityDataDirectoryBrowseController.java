@@ -11,6 +11,7 @@ import jetbrains.buildServer.serverSide.ServerPaths;
 import jetbrains.buildServer.serverSide.TeamCityProperties;
 import jetbrains.buildServer.serverSide.auth.Permission;
 import jetbrains.buildServer.serverSide.auth.SecurityContext;
+import jetbrains.buildServer.util.FileUtil;
 import jetbrains.buildServer.util.browser.Element;
 import jetbrains.buildServer.web.WebAccessHelper;
 import jetbrains.buildServer.web.WebAccessService;
@@ -138,7 +139,7 @@ public class TeamCityDataDirectoryBrowseController extends FileBrowseController 
 
     @Override
     public String getFileName() {
-      return getRelativePath(myFile.getAbsolutePath());
+      return FileUtil.getRelativePath(myRootDirectory, myFile);
     }
   }
 
